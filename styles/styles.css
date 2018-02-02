@@ -122,33 +122,58 @@ input {
 
 .basket-controls {
   width: 600px;
-  height: 70px;
+  height: 40px;
   margin: auto;
-  border: 1px solid red;
   display: flex;
   justify-content: space-around;
   align-items: center; }
   .basket-controls .button {
     box-sizing: border-box;
     cursor: pointer;
-    height: 50px;
+    height: 40px;
     border-radius: 4px;
     background: green;
     font-size: 16px;
-    line-height: 50px;
+    line-height: 40px;
     color: #fff;
     padding: 0 10px; }
   .basket-controls .delete-in-basket {
     background: red; }
 
-.basket-item {
+.basket-item-index .col-1 {
+  width: 40px; }
+
+.basket-item-index .col-2 {
+  width: 40px; }
+
+.basket-item-index .col-3 {
+  width: 300px; }
+
+.basket-item-index .col-4 {
+  width: 50px; }
+
+.basket-item-index .col-5 {
+  width: 50px; }
+
+.basket-item-header {
   width: 600px;
-  height: 80px;
-  border: 1px solid red;
   margin: auto;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #777;
+  padding-bottom: 5px;
   display: flex;
-  justify-content: space-around;
+  margin-top: 20px; }
+
+.basket-item.opaque > * {
+  opacity: .5; }
+
+.basket-item {
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 600px;
+  height: 50px;
+  border-bottom: 1px solid #777;
+  display: flex;
   align-items: center;
   font-size: 20px; }
   .basket-item .checkbox {
@@ -158,12 +183,6 @@ input {
     height: 34px;
     padding: 2px;
     font-size: 30px; }
-  .basket-item .name {
-    border: 1px solid red;
-    width: 300px;
-    max-width: 300px; }
-  .basket-item .quantity {
-    border: 1px solid red; }
   .basket-item .button {
     border: 1px solid red;
     border-radius: 4px; }

@@ -34,21 +34,31 @@ class BasketItem extends React.Component {
   render () {
     const item = this.props.item;
     return (
-      <div className="basket-item">
-        <div className="checkbox"
-          onClick={this.changeInBasket}>
-          <i className={`fa fa${item.inBasket ? "-check" : ""}-square-o`}></i>
+      <div className={`basket-item ${item.inBasket ? "opaque" : ""}`}>
+        <div className="col-1">
+          <div className="checkbox"
+            onClick={this.changeInBasket}>
+            <i className={`fa fa${item.inBasket ? "-check" : ""}-square-o`}></i>
+          </div>
         </div>
-        <div className="quantity">{item.quantity}</div>
-        <div className="name">{item.name}</div>
-        <input className="button edit"
-          onClick={this.handleEdit}
-          type="button"
-          value="Edit"/>
-        <input className="button delete"
-          onClick={this.props.handleDelete}
-          type="button"
-          value="Delete"/>
+        <div className="col col-2">
+          <div className="quantity">{item.quantity}</div>
+        </div>
+        <div className="col col-3">
+          <div className="name">{item.name}</div>
+        </div>
+        <div className="col col-4">
+          <input className="button edit"
+            onClick={this.handleEdit}
+            type="button"
+            value="Edit"/>
+        </div>
+        <div className="col col-5">
+          <input className="button delete"
+            onClick={this.props.handleDelete}
+            type="button"
+            value="Delete"/>
+        </div>
       </div>
     );
   }

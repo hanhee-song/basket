@@ -18287,10 +18287,29 @@ var Basket = function (_React$Component) {
             'div',
             { className: 'delete-in-basket button',
               onClick: this.handleDeleteBasketItems },
-            '"Delete Basket Items"'
+            'Delete Basket Items'
           )
         ),
-        basketItems
+        _react2.default.createElement(
+          'div',
+          { className: 'basket-item-index' },
+          _react2.default.createElement(
+            'div',
+            { className: 'basket-item-header' },
+            _react2.default.createElement('div', { className: 'col-1' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-2' },
+              'No.'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-3' },
+              'Name'
+            )
+          ),
+          basketItems
+        )
       );
     }
   }]);
@@ -18492,31 +18511,51 @@ var BasketItem = function (_React$Component) {
       var item = this.props.item;
       return _react2.default.createElement(
         "div",
-        { className: "basket-item" },
+        { className: "basket-item " + (item.inBasket ? "opaque" : "") },
         _react2.default.createElement(
           "div",
-          { className: "checkbox",
-            onClick: this.changeInBasket },
-          _react2.default.createElement("i", { className: "fa fa" + (item.inBasket ? "-check" : "") + "-square-o" })
+          { className: "col-1" },
+          _react2.default.createElement(
+            "div",
+            { className: "checkbox",
+              onClick: this.changeInBasket },
+            _react2.default.createElement("i", { className: "fa fa" + (item.inBasket ? "-check" : "") + "-square-o" })
+          )
         ),
         _react2.default.createElement(
           "div",
-          { className: "quantity" },
-          item.quantity
+          { className: "col col-2" },
+          _react2.default.createElement(
+            "div",
+            { className: "quantity" },
+            item.quantity
+          )
         ),
         _react2.default.createElement(
           "div",
-          { className: "name" },
-          item.name
+          { className: "col col-3" },
+          _react2.default.createElement(
+            "div",
+            { className: "name" },
+            item.name
+          )
         ),
-        _react2.default.createElement("input", { className: "button edit",
-          onClick: this.handleEdit,
-          type: "button",
-          value: "Edit" }),
-        _react2.default.createElement("input", { className: "button delete",
-          onClick: this.props.handleDelete,
-          type: "button",
-          value: "Delete" })
+        _react2.default.createElement(
+          "div",
+          { className: "col col-4" },
+          _react2.default.createElement("input", { className: "button edit",
+            onClick: this.handleEdit,
+            type: "button",
+            value: "Edit" })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "col col-5" },
+          _react2.default.createElement("input", { className: "button delete",
+            onClick: this.props.handleDelete,
+            type: "button",
+            value: "Delete" })
+        )
       );
     }
   }]);

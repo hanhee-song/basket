@@ -99,10 +99,17 @@ class Basket extends React.Component {
           </div>
           <div className="delete-in-basket button"
             onClick={this.handleDeleteBasketItems}>
-            "Delete Basket Items"
+            Delete Basket Items
           </div>
         </div>
-        {basketItems}
+        <div className="basket-item-index">
+          <div className="basket-item-header">
+            <div className="col-1"></div>
+            <div className="col-2">No.</div>
+            <div className="col-3">Name</div>
+          </div>
+          {basketItems}
+        </div>
       </div>
     );
   }
