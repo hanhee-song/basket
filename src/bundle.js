@@ -18296,7 +18296,11 @@ var Basket = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'basket-item-header' },
-            _react2.default.createElement('div', { className: 'col-1' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1' },
+              _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' })
+            ),
             _react2.default.createElement(
               'div',
               { className: 'col-2' },
@@ -18372,7 +18376,7 @@ var BasketForm = function (_React$Component) {
       if (this.state.name) {
         this.props.handleAddItem({
           name: this.state.name,
-          quantity: this.state.quantity
+          quantity: parseInt(this.state.quantity)
         });
         this.setState({
           name: "",
@@ -18415,9 +18419,6 @@ var BasketForm = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { className: "quantity-input-container" },
-          _react2.default.createElement("input", { className: "quantity input",
-            onChange: this.handleQuantityChange(),
-            value: this.state.quantity }),
           _react2.default.createElement("input", { className: "increment-button up",
             onClick: this.handleQuantityChange(1),
             type: "button",
@@ -18426,7 +18427,10 @@ var BasketForm = function (_React$Component) {
             onClick: this.handleQuantityChange(-1),
             disabled: this.state.quantity <= 1,
             type: "button",
-            value: "-" })
+            value: "-" }),
+          _react2.default.createElement("input", { className: "quantity input",
+            onChange: this.handleQuantityChange(),
+            value: this.state.quantity })
         ),
         _react2.default.createElement("input", { className: "name input",
           onChange: this.handleNameChange,
@@ -18481,14 +18485,15 @@ var BasketItem = function (_React$Component) {
     // this.props.handleDelete
     // this.props.handleEdit
 
-    // this.state = {
-    //   name: this.props.name,
-    //   quantity: this.props.quantity,
-    // };
     var _this = _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
 
+    _this.state = {
+      name: _this.props.name,
+      quantity: _this.props.quantity
+    };
     _this.handleEdit = _this.handleEdit.bind(_this);
     _this.changeInBasket = _this.changeInBasket.bind(_this);
+    _this.handleIncrement = _this.handleIncrement.bind(_this);
     return _this;
   }
 
@@ -18504,6 +18509,15 @@ var BasketItem = function (_React$Component) {
     key: "changeInBasket",
     value: function changeInBasket() {
       this.props.handleEdit(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));
+    }
+  }, {
+    key: "handleIncrement",
+    value: function handleIncrement(num) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.props.handleEdit(Object.assign({}, _this2.props.item, { quantity: _this2.props.item.quantity + num }));
+      };
     }
   }, {
     key: "render",
@@ -18543,10 +18557,15 @@ var BasketItem = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { className: "col col-4" },
-          _react2.default.createElement("input", { className: "button edit",
-            onClick: this.handleEdit,
+          _react2.default.createElement("input", { className: "button increment-down",
+            onClick: this.handleIncrement(-1),
+            disabled: this.props.item.quantity <= 1,
             type: "button",
-            value: "Edit" })
+            value: "-" }),
+          _react2.default.createElement("input", { className: "button increment-up",
+            onClick: this.handleIncrement(1),
+            type: "button",
+            value: "+" })
         ),
         _react2.default.createElement(
           "div",

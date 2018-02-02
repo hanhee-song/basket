@@ -61,23 +61,17 @@ input {
 .add-item-form {
   width: 600px;
   margin: auto;
-  margin-bottom: 10px;
-  height: 100px;
-  border: 1px solid #777;
-  border-radius: 4px;
+  height: 80px;
   align-items: center;
   display: flex;
-  justify-content: space-around;
-  -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2); }
+  justify-content: space-around; }
   .add-item-form .input {
     height: 50px;
     font-size: 24px;
     border: 1px solid #888;
     border-radius: 4px;
     transition: border .2s;
-    -webkit-transition: border .2s;
+    -webkit-transition: border .1s, box-shadow .1s, -moz-box-shadow .1s, -webkit-box-shadow .1s;
     padding-left: 10px; }
     .add-item-form .input:focus {
       border: 1px solid green;
@@ -95,17 +89,18 @@ input {
       right: 1px;
       height: 25px;
       width: 30px;
-      border: 1px solid transparent; }
+      border: 1px solid transparent;
+      background-color: #dbdbdb;
+      font-size: 18px; }
     .add-item-form .quantity-input-container .up {
       top: 1px;
-      border-top-right-radius: 4px;
-      background-color: #dbdbdb; }
+      border-top-right-radius: 4px; }
     .add-item-form .quantity-input-container .down {
       bottom: 1px;
-      border-bottom-right-radius: 4px;
-      background-color: #dbdbdb; }
+      border-bottom-right-radius: 4px; }
     .add-item-form .quantity-input-container .increment-button:disabled {
-      opacity: .6; }
+      opacity: .6;
+      cursor: not-allowed; }
   .add-item-form .quantity {
     width: 80px; }
   .add-item-form .add-item-button {
@@ -118,42 +113,53 @@ input {
     border-radius: 4px;
     font-size: 20px; }
     .add-item-form .add-item-button:disabled {
-      opacity: .5; }
+      opacity: .5;
+      cursor: not-allowed; }
 
 .basket-controls {
   width: 600px;
   height: 40px;
   margin: auto;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-around;
   align-items: center; }
   .basket-controls .button {
     box-sizing: border-box;
     cursor: pointer;
-    height: 40px;
+    height: 36px;
     border-radius: 4px;
     background: green;
     font-size: 16px;
-    line-height: 40px;
+    line-height: 36px;
     color: #fff;
-    padding: 0 10px; }
+    padding: 0 10px;
+    user-select: none; }
+  .basket-controls .toggle-in-basket {
+    width: 157px;
+    text-align: center; }
   .basket-controls .delete-in-basket {
     background: red; }
 
+.basket-item-index .col {
+  overflow: hidden; }
+
 .basket-item-index .col-1 {
-  width: 40px; }
+  padding-left: 8px;
+  width: 54px; }
 
 .basket-item-index .col-2 {
   width: 40px; }
 
 .basket-item-index .col-3 {
-  width: 300px; }
+  width: 250px;
+  max-width: 250px; }
 
 .basket-item-index .col-4 {
-  width: 50px; }
+  width: 150px; }
 
 .basket-item-index .col-5 {
-  width: 50px; }
+  width: 90px; }
 
 .basket-item-header {
   width: 600px;
@@ -183,6 +189,23 @@ input {
     height: 34px;
     padding: 2px;
     font-size: 30px; }
+  .basket-item .name {
+    height: 30px;
+    line-height: 30px; }
   .basket-item .button {
-    border: 1px solid red;
-    border-radius: 4px; }
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    min-width: 30px;
+    background: #dbdbdb;
+    font-size: 18px; }
+    .basket-item .button:disabled {
+      opacity: .5;
+      cursor: not-allowed; }
+  .basket-item .increment-down {
+    margin-right: 10px; }
+  .basket-item .delete {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: red;
+    color: #fff; }

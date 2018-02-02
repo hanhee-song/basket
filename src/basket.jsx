@@ -104,7 +104,8 @@ class Basket extends React.Component {
         </div>
         <div className="basket-item-index">
           <div className="basket-item-header">
-            <div className="col-1"></div>
+            <div className="col-1"><i className="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
             <div className="col-2">No.</div>
             <div className="col-3">Name</div>
           </div>

@@ -8,12 +8,13 @@ class BasketItem extends React.Component {
     // this.props.handleDelete
     // this.props.handleEdit
     
-    // this.state = {
-    //   name: this.props.name,
-    //   quantity: this.props.quantity,
-    // };
+    this.state = {
+      name: this.props.name,
+      quantity: this.props.quantity,
+    };
     this.handleEdit = this.handleEdit.bind(this);
     this.changeInBasket = this.changeInBasket.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
   }
   
   handleEdit() {
@@ -29,6 +30,16 @@ class BasketItem extends React.Component {
       this.props.item,
       { inBasket: !this.props.item.inBasket }
     ));
+  }
+  
+  handleIncrement(num) {
+    return (e) => {
+      this.props.handleEdit(Object.assign(
+        {},
+        this.props.item,
+        { quantity: this.props.item.quantity + num }
+      ));
+    };
   }
   
   render () {
@@ -48,10 +59,15 @@ class BasketItem extends React.Component {
           <div className="name">{item.name}</div>
         </div>
         <div className="col col-4">
-          <input className="button edit"
-            onClick={this.handleEdit}
+          <input className="button increment-down"
+            onClick={this.handleIncrement(-1)}
+            disabled={this.props.item.quantity <= 1}
             type="button"
-            value="Edit"/>
+            value="-"/>
+          <input className="button increment-up"
+            onClick={this.handleIncrement(1)}
+            type="button"
+            value="+"/>
         </div>
         <div className="col col-5">
           <input className="button delete"

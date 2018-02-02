@@ -18,7 +18,7 @@ class BasketForm extends React.Component {
     if (this.state.name) {
       this.props.handleAddItem({
         name: this.state.name,
-        quantity: this.state.quantity,
+        quantity: parseInt(this.state.quantity),
       });
       this.setState({
         name: "",
@@ -53,9 +53,6 @@ class BasketForm extends React.Component {
       <form className="add-item-form"
         onSubmit={this.handleAddItem}>
         <div className="quantity-input-container">
-          <input className="quantity input"
-            onChange={this.handleQuantityChange()}
-            value={this.state.quantity} />
           <input className="increment-button up"
             onClick={this.handleQuantityChange(1)}
             type="button"
@@ -65,6 +62,9 @@ class BasketForm extends React.Component {
             disabled={this.state.quantity <= 1}
             type="button"
             value="-" />
+          <input className="quantity input"
+            onChange={this.handleQuantityChange()}
+            value={this.state.quantity} />
         </div>
         <input className="name input"
           onChange={this.handleNameChange}
