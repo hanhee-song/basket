@@ -18196,7 +18196,7 @@ var Basket = function (_React$Component) {
         var item = this.state.items[i];
         if (item.name.toLowerCase() === itemToAdd.name.toLowerCase()) {
           newItem = Object.assign({}, item);
-          newItem.quantity += 1;
+          newItem.quantity += itemToAdd.quantity;
           var items = this.state.items.slice(0, i).concat(newItem).concat(this.state.items.slice(i + 1));
           this.setState({ items: items });
           return;
