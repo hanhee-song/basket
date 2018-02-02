@@ -7,10 +7,13 @@ class Basket extends React.Component {
     super(props);
     this.state = {
       items: [],
+      hideInBasketItems: false,
     };
     this.handleAddItem = this.handleAddItem.bind(this);
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
     this.handleEditItem = this.handleEditItem.bind(this);
+    this.handleToggleHideBasketItems = this.handleToggleHideBasketItems.bind(this);
+    this.handleDeleteBasketItems = this.handleDeleteBasketItems.bind(this);
   }
   
   handleAddItem(itemToAdd) {
@@ -60,8 +63,21 @@ class Basket extends React.Component {
     };
   }
   
+  handleToggleHideBasketItems() {
+    this.setState({ hideInBasketItems: !this.state.hideInBasketItems });
+  }
+  
+  handleDeleteBasketItems() {
+    const items = this.state.items.filter(item => !item.inBasket);
+    this.setState({ items });
+  }
+  
   render () {
-    const basketItems = this.state.items.map((item) => {
+    let basketItems = this.state.items;
+    if (this.state.hideInBasketItems) {
+      basketItems = basketItems.filter(item => !item.inBasket);
+    }
+    basketItems = basketItems.map(item => {
       return (
         <BasketItem
           handleDelete={this.handleDeleteItem(item.id)}
@@ -77,7 +93,14 @@ class Basket extends React.Component {
         <BasketForm
           handleAddItem={this.handleAddItem}/>
         <div className="basket-controls">
-          This is basket controls
+          <div className="toggle-in-basket button"
+            onClick={this.handleToggleHideBasketItems}>
+            {`${this.state.hideInBasketItems ? "Show" : "Hide"} Basket Items`}
+          </div>
+          <div className="delete-in-basket button"
+            onClick={this.handleDeleteBasketItems}>
+            "Delete Basket Items"
+          </div>
         </div>
         {basketItems}
       </div>

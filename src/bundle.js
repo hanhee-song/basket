@@ -18168,11 +18168,14 @@ var Basket = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Basket.__proto__ || Object.getPrototypeOf(Basket)).call(this, props));
 
     _this.state = {
-      items: []
+      items: [],
+      hideInBasketItems: false
     };
     _this.handleAddItem = _this.handleAddItem.bind(_this);
     _this.handleDeleteItem = _this.handleDeleteItem.bind(_this);
     _this.handleEditItem = _this.handleEditItem.bind(_this);
+    _this.handleToggleHideBasketItems = _this.handleToggleHideBasketItems.bind(_this);
+    _this.handleDeleteBasketItems = _this.handleDeleteBasketItems.bind(_this);
     return _this;
   }
 
@@ -18230,11 +18233,30 @@ var Basket = function (_React$Component) {
       };
     }
   }, {
+    key: 'handleToggleHideBasketItems',
+    value: function handleToggleHideBasketItems() {
+      this.setState({ hideInBasketItems: !this.state.hideInBasketItems });
+    }
+  }, {
+    key: 'handleDeleteBasketItems',
+    value: function handleDeleteBasketItems() {
+      var items = this.state.items.filter(function (item) {
+        return !item.inBasket;
+      });
+      this.setState({ items: items });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this4 = this;
 
-      var basketItems = this.state.items.map(function (item) {
+      var basketItems = this.state.items;
+      if (this.state.hideInBasketItems) {
+        basketItems = basketItems.filter(function (item) {
+          return !item.inBasket;
+        });
+      }
+      basketItems = basketItems.map(function (item) {
         return _react2.default.createElement(_basket_item2.default, {
           handleDelete: _this4.handleDeleteItem(item.id),
           handleEdit: _this4.handleEditItem(item.id),
@@ -18255,7 +18277,18 @@ var Basket = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'basket-controls' },
-          'This is basket controls'
+          _react2.default.createElement(
+            'div',
+            { className: 'toggle-in-basket button',
+              onClick: this.handleToggleHideBasketItems },
+            (this.state.hideInBasketItems ? "Show" : "Hide") + ' Basket Items'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'delete-in-basket button',
+              onClick: this.handleDeleteBasketItems },
+            '"Delete Basket Items"'
+          )
         ),
         basketItems
       );
