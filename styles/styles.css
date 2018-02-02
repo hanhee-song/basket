@@ -135,6 +135,8 @@ input {
     color: #fff;
     padding: 0 10px;
     user-select: none; }
+    .basket-controls .button:disabled {
+      opacity: .5; }
   .basket-controls .toggle-in-basket {
     width: 157px;
     text-align: center; }

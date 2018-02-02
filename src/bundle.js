@@ -18137,6 +18137,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
@@ -18169,19 +18171,23 @@ var Basket = function (_React$Component) {
 
     _this.state = {
       items: [],
-      hideInBasketItems: false
+      hideInBasketItems: false,
+      history: []
     };
     _this.handleAddItem = _this.handleAddItem.bind(_this);
     _this.handleDeleteItem = _this.handleDeleteItem.bind(_this);
     _this.handleEditItem = _this.handleEditItem.bind(_this);
     _this.handleToggleHideBasketItems = _this.handleToggleHideBasketItems.bind(_this);
     _this.handleDeleteBasketItems = _this.handleDeleteBasketItems.bind(_this);
+    _this.updateHistory = _this.updateHistory.bind(_this);
+    _this.handleUndoChange = _this.handleUndoChange.bind(_this);
     return _this;
   }
 
   _createClass(Basket, [{
     key: 'handleAddItem',
     value: function handleAddItem(itemToAdd) {
+      this.updateHistory();
       var newItem = void 0;
 
       // Look in items for item of same name
@@ -18209,6 +18215,7 @@ var Basket = function (_React$Component) {
       var _this2 = this;
 
       return function () {
+        _this2.updateHistory();
         var newItems = _this2.state.items.filter(function (item) {
           return item.id !== id;
         });
@@ -18216,9 +18223,25 @@ var Basket = function (_React$Component) {
       };
     }
   }, {
-    key: 'handleUndoDelete',
-    value: function handleUndoDelete() {
-      // TODO: bonus feature
+    key: 'updateHistory',
+    value: function updateHistory() {
+      var newEntry = {
+        items: deepCopy(this.state.items),
+        hideInBasketItems: this.state.hideInBasketItems
+      };
+      this.setState({
+        history: this.state.history.slice(this.state.history.length - 20).concat(newEntry)
+      });
+    }
+  }, {
+    key: 'handleUndoChange',
+    value: function handleUndoChange() {
+      var pastEntry = this.state.history[this.state.history.length - 1];
+      this.setState({
+        items: pastEntry.items,
+        hideInBasketItems: pastEntry.hideInBasketItems,
+        history: this.state.history.slice(0, this.state.history.length - 1)
+      });
     }
   }, {
     key: 'handleEditItem',
@@ -18226,6 +18249,7 @@ var Basket = function (_React$Component) {
       var _this3 = this;
 
       return function (newItem) {
+        _this3.updateHistory();
         var newItems = _this3.state.items.map(function (item) {
           return item.id === id ? Object.assign({}, item, newItem) : item;
         });
@@ -18235,11 +18259,13 @@ var Basket = function (_React$Component) {
   }, {
     key: 'handleToggleHideBasketItems',
     value: function handleToggleHideBasketItems() {
+      this.updateHistory();
       this.setState({ hideInBasketItems: !this.state.hideInBasketItems });
     }
   }, {
     key: 'handleDeleteBasketItems',
     value: function handleDeleteBasketItems() {
+      this.updateHistory();
       var items = this.state.items.filter(function (item) {
         return !item.inBasket;
       });
@@ -18288,7 +18314,12 @@ var Basket = function (_React$Component) {
             { className: 'delete-in-basket button',
               onClick: this.handleDeleteBasketItems },
             'Delete Basket Items'
-          )
+          ),
+          _react2.default.createElement('input', { className: 'undo-change button',
+            type: 'button',
+            onClick: this.handleUndoChange,
+            value: 'Undo Change',
+            disabled: this.state.history.length === 0 })
         ),
         _react2.default.createElement(
           'div',
@@ -18322,6 +18353,17 @@ var Basket = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Basket;
+
+
+function deepCopy(o) {
+  var output, v, key;
+  output = Array.isArray(o) ? [] : {};
+  for (key in o) {
+    v = o[key];
+    output[key] = (typeof v === 'undefined' ? 'undefined' : _typeof(v)) === "object" ? copy(v) : v;
+  }
+  return output;
+}
 
 /***/ }),
 /* 32 */,

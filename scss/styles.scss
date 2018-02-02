@@ -177,6 +177,11 @@ input {
     color: #fff;
     padding: 0 10px;
     user-select: none;
+    
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
   }
   
   .toggle-in-basket {
