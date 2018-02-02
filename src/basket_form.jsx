@@ -17,7 +17,6 @@ class BasketForm extends React.Component {
     e.preventDefault();
     if (this.state.name) {
       this.props.handleAddItem({
-        id: Math.random(),
         name: this.state.name,
         quantity: this.state.quantity,
       });

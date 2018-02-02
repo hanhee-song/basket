@@ -29,11 +29,6 @@ class BasketItem extends React.Component {
       this.props.item,
       { inBasket: !this.props.item.inBasket }
     ));
-    console.log(Object.assign(
-      {},
-      this.props.item,
-      { inBasket: !this.props.item.inBasket }
-    ));
   }
   
   render () {

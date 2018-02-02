@@ -13,9 +13,30 @@ class Basket extends React.Component {
     this.handleEditItem = this.handleEditItem.bind(this);
   }
   
-  handleAddItem(item) {
-    const newItem = item;
-    newItem.inBasket = false;
+  handleAddItem(itemToAdd) {
+    let newItem;
+    
+    // Look in items for item of same name
+    // If found, just update the quant
+    for (var i = 0; i < this.state.items.length; i++) {
+      const item = this.state.items[i];
+      if (item.name.toLowerCase() === itemToAdd.name.toLowerCase()) {
+        newItem = Object.assign({}, item);
+        newItem.quantity += 1;
+        const items = this.state.items.slice(0, i)
+          .concat(newItem)
+          .concat(this.state.items.slice(i+1));
+        this.setState({ items });
+        return;
+      }
+    }
+    // Otherwise, add it to the end
+    newItem = Object.assign({}, itemToAdd,
+        {
+          inBasket: false,
+          id: Math.random(),
+        }
+      );
     this.setState({ items: this.state.items.concat(newItem) });
   }
   
@@ -24,6 +45,10 @@ class Basket extends React.Component {
       const newItems = this.state.items.filter(item => item.id !== id);
       this.setState({ items: newItems });
     };
+  }
+  
+  handleUndoDelete() {
+    // TODO: bonus feature
   }
   
   handleEditItem(id) {
@@ -51,6 +76,9 @@ class Basket extends React.Component {
         <div className="title">This is a basket</div>
         <BasketForm
           handleAddItem={this.handleAddItem}/>
+        <div className="basket-controls">
+          This is basket controls
+        </div>
         {basketItems}
       </div>
     );

@@ -18178,9 +18178,26 @@ var Basket = function (_React$Component) {
 
   _createClass(Basket, [{
     key: 'handleAddItem',
-    value: function handleAddItem(item) {
-      var newItem = item;
-      newItem.inBasket = false;
+    value: function handleAddItem(itemToAdd) {
+      var newItem = void 0;
+
+      // Look in items for item of same name
+      // If found, just update the quant
+      for (var i = 0; i < this.state.items.length; i++) {
+        var item = this.state.items[i];
+        if (item.name.toLowerCase() === itemToAdd.name.toLowerCase()) {
+          newItem = Object.assign({}, item);
+          newItem.quantity += 1;
+          var items = this.state.items.slice(0, i).concat(newItem).concat(this.state.items.slice(i + 1));
+          this.setState({ items: items });
+          return;
+        }
+      }
+      // Otherwise, add it to the end
+      newItem = Object.assign({}, itemToAdd, {
+        inBasket: false,
+        id: Math.random()
+      });
       this.setState({ items: this.state.items.concat(newItem) });
     }
   }, {
@@ -18194,6 +18211,11 @@ var Basket = function (_React$Component) {
         });
         _this2.setState({ items: newItems });
       };
+    }
+  }, {
+    key: 'handleUndoDelete',
+    value: function handleUndoDelete() {
+      // TODO: bonus feature
     }
   }, {
     key: 'handleEditItem',
@@ -18230,6 +18252,11 @@ var Basket = function (_React$Component) {
         ),
         _react2.default.createElement(_basket_form2.default, {
           handleAddItem: this.handleAddItem }),
+        _react2.default.createElement(
+          'div',
+          { className: 'basket-controls' },
+          'This is basket controls'
+        ),
         basketItems
       );
     }
@@ -18292,7 +18319,6 @@ var BasketForm = function (_React$Component) {
       e.preventDefault();
       if (this.state.name) {
         this.props.handleAddItem({
-          id: Math.random(),
           name: this.state.name,
           quantity: this.state.quantity
         });
@@ -18426,7 +18452,6 @@ var BasketItem = function (_React$Component) {
     key: "changeInBasket",
     value: function changeInBasket() {
       this.props.handleEdit(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));
-      console.log(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));
     }
   }, {
     key: "render",
