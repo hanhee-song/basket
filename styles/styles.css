@@ -53,6 +53,7 @@ input {
   box-sizing: border-box; }
 
 .basket {
+  margin-top: 50px;
   font-family: 'Roboto', sans-serif; }
   .basket .title {
     font-size: 48px;
@@ -136,6 +137,7 @@ input {
     padding: 0 10px;
     user-select: none; }
     .basket-controls .button:disabled {
+      cursor: not-allowed;
       opacity: .5; }
   .basket-controls .toggle-in-basket {
     width: 157px;

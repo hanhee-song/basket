@@ -112,7 +112,7 @@ class Basket extends React.Component {
     
     return (
       <div className="basket">
-        <div className="title">This is a basket</div>
+        <div className="title">Basket</div>
         <BasketForm
           handleAddItem={this.handleAddItem}/>
         <div className="basket-controls">

@@ -18296,7 +18296,7 @@ var Basket = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'title' },
-          'This is a basket'
+          'Basket'
         ),
         _react2.default.createElement(_basket_form2.default, {
           handleAddItem: this.handleAddItem }),
