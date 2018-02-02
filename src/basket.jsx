@@ -27,7 +27,7 @@ class Basket extends React.Component {
   handleEditItem(id) {
     return (newItem) => {
       const newItems = this.state.items.map(item => {
-        return item.id === id ? Object.assign({}, newItem, item) : item;
+        return item.id === id ? Object.assign({}, item, newItem) : item;
       });
       this.setState({ items: newItems });
     };
@@ -47,7 +47,7 @@ class Basket extends React.Component {
     
     return (
       <div className="basket">
-        This is a basket
+        <div className="title">This is a basket</div>
         <BasketForm
           handleAddItem={this.handleAddItem}/>
         {basketItems}

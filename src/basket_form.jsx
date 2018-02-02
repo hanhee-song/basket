@@ -53,22 +53,25 @@ class BasketForm extends React.Component {
     return (
       <form className="add-item-form"
         onSubmit={this.handleAddItem}>
-        <input className="name"
+        <input className="name input"
           onChange={this.handleNameChange}
+          placeholder="What would you like to add?"
           value={this.state.name} />
-        <input className="quantity"
-          onChange={this.handleQuantityChange()}
-          value={this.state.quantity} />
-        <input className="increment-up-button"
-          onClick={this.handleQuantityChange(1)}
-          type="button"
-          value="+" />
-        <input className="increment-down-button"
-          onClick={this.handleQuantityChange(-1)}
-          disabled={this.state.quantity <= 1}
-          type="button"
-          value="-" />
-        <input className="button"
+        <div className="quantity-input-container">
+          <input className="quantity input"
+            onChange={this.handleQuantityChange()}
+            value={this.state.quantity} />
+          <input className="increment-button up"
+            onClick={this.handleQuantityChange(1)}
+            type="button"
+            value="+" />
+          <input className="increment-button down"
+            onClick={this.handleQuantityChange(-1)}
+            disabled={this.state.quantity <= 1}
+            type="button"
+            value="-" />
+        </div>
+        <input className="add-item-button"
           disabled={!this.state.name}
           type="submit"
           value="Add Item" />

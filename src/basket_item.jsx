@@ -24,8 +24,12 @@ class BasketItem extends React.Component {
   render () {
     return (
       <div className="basket-item">
-        name: {this.props.name}
-        quantity: {this.props.quantity}
+        <div className="name">
+          {this.props.name}
+        </div>
+        <div className="quantity">
+          {this.props.quantity}
+        </div>
         <input
           onClick={this.handleEdit}
           type="button"
