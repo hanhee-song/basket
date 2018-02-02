@@ -61,7 +61,7 @@ class Basket extends React.Component {
       hideInBasketItems: this.state.hideInBasketItems,
     };
     this.setState({
-      history: this.state.history.slice(this.state.history.length - 20).concat(newEntry)
+      history: this.state.history.slice(this.state.history.length - 40).concat(newEntry)
     });
   }
   
