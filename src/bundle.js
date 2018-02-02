@@ -18181,6 +18181,8 @@ var Basket = function (_React$Component) {
       items: []
     };
     _this.handleAddItem = _this.handleAddItem.bind(_this);
+    _this.handleDeleteItem = _this.handleDeleteItem.bind(_this);
+    _this.handleEditItem = _this.handleEditItem.bind(_this);
     return _this;
   }
 
@@ -18190,10 +18192,38 @@ var Basket = function (_React$Component) {
       this.setState({ items: this.state.items.concat(item) });
     }
   }, {
+    key: 'handleDeleteItem',
+    value: function handleDeleteItem(id) {
+      var _this2 = this;
+
+      return function () {
+        var newItems = _this2.state.items.filter(function (item) {
+          return item.id !== id;
+        });
+        _this2.setState({ items: newItems });
+      };
+    }
+  }, {
+    key: 'handleEditItem',
+    value: function handleEditItem(id) {
+      var _this3 = this;
+
+      return function (newItem) {
+        var newItems = _this3.state.items.map(function (item) {
+          return item.id === id ? Object.assign({}, newItem, item) : item;
+        });
+        _this3.setState({ items: newItems });
+      };
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       var basketItems = this.state.items.map(function (item) {
         return _react2.default.createElement(_basket_item2.default, {
+          handleDelete: _this4.handleDeleteItem(item.id),
+          handleEdit: _this4.handleEditItem(item.id),
           key: item.id,
           name: item.name,
           quantity: item.quantity });
@@ -18368,12 +18398,29 @@ var BasketItem = function (_React$Component) {
   function BasketItem(props) {
     _classCallCheck(this, BasketItem);
 
-    return _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
     // this.props.name
     // this.props.quantity
+    // this.props.handleDelete
+    // this.props.handleEdit
+    var _this = _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
+
+    _this.state = {
+      name: _this.props.name,
+      quantity: _this.props.quantity
+    };
+    _this.handleEdit = _this.handleEdit.bind(_this);
+    return _this;
   }
 
   _createClass(BasketItem, [{
+    key: "handleEdit",
+    value: function handleEdit() {
+      this.props.handleEdit({
+        name: this.state.name,
+        quantity: this.state.quantity
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -18382,7 +18429,15 @@ var BasketItem = function (_React$Component) {
         "name: ",
         this.props.name,
         "quantity: ",
-        this.props.quantity
+        this.props.quantity,
+        _react2.default.createElement("input", {
+          onClick: this.handleEdit,
+          type: "button",
+          value: "Edit" }),
+        _react2.default.createElement("input", {
+          onClick: this.props.handleDelete,
+          type: "button",
+          value: "Delete" })
       );
     }
   }]);
