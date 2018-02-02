@@ -14,7 +14,9 @@ class Basket extends React.Component {
   }
   
   handleAddItem(item) {
-    this.setState({ items: this.state.items.concat(item) });
+    const newItem = item;
+    newItem.inBasket = false;
+    this.setState({ items: this.state.items.concat(newItem) });
   }
   
   handleDeleteItem(id) {
@@ -40,8 +42,7 @@ class Basket extends React.Component {
           handleDelete={this.handleDeleteItem(item.id)}
           handleEdit={this.handleEditItem(item.id)}
           key={item.id}
-          name={item.name}
-          quantity={item.quantity}/>
+          item={item}/>
       );
     });
     

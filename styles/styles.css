@@ -60,7 +60,8 @@ input {
 
 .add-item-form {
   width: 600px;
-  margin: 0 auto;
+  margin: auto;
+  margin-bottom: 40px;
   height: 100px;
   border: 1px solid #777;
   border-radius: 4px;
@@ -118,3 +119,23 @@ input {
     font-size: 20px; }
     .add-item-form .add-item-button:disabled {
       opacity: .5; }
+
+.basket-item {
+  width: 600px;
+  height: 80px;
+  border: 1px solid red;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px; }
+  .basket-item .name {
+    border: 1px solid red;
+    width: 300px;
+    max-width: 300px; }
+  .basket-item .quantity {
+    border: 1px solid red; }
+  .basket-item .button {
+    border: 1px solid red;
+    border-radius: 4px; }

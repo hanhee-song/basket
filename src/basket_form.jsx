@@ -53,10 +53,6 @@ class BasketForm extends React.Component {
     return (
       <form className="add-item-form"
         onSubmit={this.handleAddItem}>
-        <input className="name input"
-          onChange={this.handleNameChange}
-          placeholder="What would you like to add?"
-          value={this.state.name} />
         <div className="quantity-input-container">
           <input className="quantity input"
             onChange={this.handleQuantityChange()}
@@ -71,6 +67,10 @@ class BasketForm extends React.Component {
             type="button"
             value="-" />
         </div>
+        <input className="name input"
+          onChange={this.handleNameChange}
+          placeholder="What would you like to add?"
+          value={this.state.name} />
         <input className="add-item-button"
           disabled={!this.state.name}
           type="submit"

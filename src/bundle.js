@@ -18179,7 +18179,9 @@ var Basket = function (_React$Component) {
   _createClass(Basket, [{
     key: 'handleAddItem',
     value: function handleAddItem(item) {
-      this.setState({ items: this.state.items.concat(item) });
+      var newItem = item;
+      newItem.inBasket = false;
+      this.setState({ items: this.state.items.concat(newItem) });
     }
   }, {
     key: 'handleDeleteItem',
@@ -18215,8 +18217,7 @@ var Basket = function (_React$Component) {
           handleDelete: _this4.handleDeleteItem(item.id),
           handleEdit: _this4.handleEditItem(item.id),
           key: item.id,
-          name: item.name,
-          quantity: item.quantity });
+          item: item });
       });
 
       return _react2.default.createElement(
@@ -18333,10 +18334,6 @@ var BasketForm = function (_React$Component) {
         "form",
         { className: "add-item-form",
           onSubmit: this.handleAddItem },
-        _react2.default.createElement("input", { className: "name input",
-          onChange: this.handleNameChange,
-          placeholder: "What would you like to add?",
-          value: this.state.name }),
         _react2.default.createElement(
           "div",
           { className: "quantity-input-container" },
@@ -18353,6 +18350,10 @@ var BasketForm = function (_React$Component) {
             type: "button",
             value: "-" })
         ),
+        _react2.default.createElement("input", { className: "name input",
+          onChange: this.handleNameChange,
+          placeholder: "What would you like to add?",
+          value: this.state.name }),
         _react2.default.createElement("input", { className: "add-item-button",
           disabled: !this.state.name,
           type: "submit",
@@ -18401,12 +18402,13 @@ var BasketItem = function (_React$Component) {
     // this.props.quantity
     // this.props.handleDelete
     // this.props.handleEdit
+
+    // this.state = {
+    //   name: this.props.name,
+    //   quantity: this.props.quantity,
+    // };
     var _this = _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
 
-    _this.state = {
-      name: _this.props.name,
-      quantity: _this.props.quantity
-    };
     _this.handleEdit = _this.handleEdit.bind(_this);
     return _this;
   }
@@ -18414,32 +18416,38 @@ var BasketItem = function (_React$Component) {
   _createClass(BasketItem, [{
     key: "handleEdit",
     value: function handleEdit() {
-      this.props.handleEdit({
-        name: this.state.name,
-        quantity: this.state.quantity
-      });
+      // this.props.handleEdit({
+      //   name: this.state.name,
+      //   quantity: this.state.quantity,
+      // });
     }
   }, {
     key: "render",
     value: function render() {
+      var item = this.props.item;
       return _react2.default.createElement(
         "div",
         { className: "basket-item" },
         _react2.default.createElement(
           "div",
-          { className: "name" },
-          this.props.name
+          { className: "checkbox" },
+          item.inBasket ? _react2.default.createElement("i", { className: "far fa-square-check" }) : _react2.default.createElement("i", { className: "far fa-square" })
         ),
         _react2.default.createElement(
           "div",
           { className: "quantity" },
-          this.props.quantity
+          item.quantity
         ),
-        _react2.default.createElement("input", {
+        _react2.default.createElement(
+          "div",
+          { className: "name" },
+          item.name
+        ),
+        _react2.default.createElement("input", { className: "button edit",
           onClick: this.handleEdit,
           type: "button",
           value: "Edit" }),
-        _react2.default.createElement("input", {
+        _react2.default.createElement("input", { className: "button delete",
           onClick: this.props.handleDelete,
           type: "button",
           value: "Delete" })
