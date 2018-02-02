@@ -8,17 +8,29 @@ class Basket extends React.Component {
     this.state = {
       items: [],
     };
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
   
-  handleAddItem() {
-    this.setState({ items: this.state.items.concat() });
+  handleAddItem(item) {
+    this.setState({ items: this.state.items.concat(item) });
   }
   
   render () {
+    const basketItems = this.state.items.map((item) => {
+      return (
+        <BasketItem
+          key={item.id}
+          name={item.name}
+          quantity={item.quantity}/>
+      );
+    });
+    
     return (
       <div className="basket">
         This is a basket
-        <BasketForm />
+        <BasketForm
+          handleAddItem={this.handleAddItem}/>
+        {basketItems}
       </div>
     );
   }

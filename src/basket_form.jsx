@@ -7,15 +7,29 @@ class BasketForm extends React.Component {
       name: "",
       quantity: 1,
     };
+    // this.props.handleAddItem
+    this.handleAddItem = this.handleAddItem.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
   }
   
   handleAddItem(e) {
     e.preventDefault();
-    // this.props.handleAddItem();
+    if (this.state.name) {
+      this.props.handleAddItem({
+        id: Math.random(),
+        name: this.state.name,
+        quantity: this.state.quantity,
+      });
+      this.setState({
+        name: "",
+        quantity: 1,
+      });
+    }
   }
   
   handleNameChange(e) {
-    this.setState({ name: e.target.name });
+    this.setState({ name: e.target.value });
   }
   
   handleQuantityChange(num) {
@@ -55,6 +69,7 @@ class BasketForm extends React.Component {
           type="button"
           value="-" />
         <input className="button"
+          disabled={!this.state.name}
           type="submit"
           value="Add Item" />
       </form>

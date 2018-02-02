@@ -18180,22 +18180,32 @@ var Basket = function (_React$Component) {
     _this.state = {
       items: []
     };
+    _this.handleAddItem = _this.handleAddItem.bind(_this);
     return _this;
   }
 
   _createClass(Basket, [{
     key: 'handleAddItem',
-    value: function handleAddItem() {
-      this.setState({ items: this.state.items.concat() });
+    value: function handleAddItem(item) {
+      this.setState({ items: this.state.items.concat(item) });
     }
   }, {
     key: 'render',
     value: function render() {
+      var basketItems = this.state.items.map(function (item) {
+        return _react2.default.createElement(_basket_item2.default, {
+          key: item.id,
+          name: item.name,
+          quantity: item.quantity });
+      });
+
       return _react2.default.createElement(
         'div',
         { className: 'basket' },
         'This is a basket',
-        _react2.default.createElement(_basket_form2.default, null)
+        _react2.default.createElement(_basket_form2.default, {
+          handleAddItem: this.handleAddItem }),
+        basketItems
       );
     }
   }]);
@@ -18244,6 +18254,10 @@ var BasketForm = function (_React$Component) {
       name: "",
       quantity: 1
     };
+    // this.props.handleAddItem
+    _this.handleAddItem = _this.handleAddItem.bind(_this);
+    _this.handleNameChange = _this.handleNameChange.bind(_this);
+    _this.handleQuantityChange = _this.handleQuantityChange.bind(_this);
     return _this;
   }
 
@@ -18251,12 +18265,22 @@ var BasketForm = function (_React$Component) {
     key: "handleAddItem",
     value: function handleAddItem(e) {
       e.preventDefault();
-      // this.props.handleAddItem();
+      if (this.state.name) {
+        this.props.handleAddItem({
+          id: Math.random(),
+          name: this.state.name,
+          quantity: this.state.quantity
+        });
+        this.setState({
+          name: "",
+          quantity: 1
+        });
+      }
     }
   }, {
     key: "handleNameChange",
     value: function handleNameChange(e) {
-      this.setState({ name: e.target.name });
+      this.setState({ name: e.target.value });
     }
   }, {
     key: "handleQuantityChange",
@@ -18301,6 +18325,7 @@ var BasketForm = function (_React$Component) {
           type: "button",
           value: "-" }),
         _react2.default.createElement("input", { className: "button",
+          disabled: !this.state.name,
           type: "submit",
           value: "Add Item" })
       );
@@ -18340,10 +18365,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var BasketItem = function (_React$Component) {
   _inherits(BasketItem, _React$Component);
 
-  function BasketItem() {
+  function BasketItem(props) {
     _classCallCheck(this, BasketItem);
 
-    return _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
+    // this.props.name
+    // this.props.quantity
   }
 
   _createClass(BasketItem, [{
@@ -18352,7 +18379,10 @@ var BasketItem = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "basket-item" },
-        "This is a basket item"
+        "name: ",
+        this.props.name,
+        "quantity: ",
+        this.props.quantity
       );
     }
   }]);
