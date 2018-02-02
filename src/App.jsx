@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Basket from './basket';
 
 class App extends React.Component {
   render () {
     return (
       <div className="app">
-        Your react is working
+        <div>This is title</div>
+        <Basket />
+        <div>This is footer</div>
       </div>
     );
   }
