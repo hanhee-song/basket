@@ -12,16 +12,8 @@ class BasketItem extends React.Component {
       name: this.props.name,
       quantity: this.props.quantity,
     };
-    this.handleEdit = this.handleEdit.bind(this);
     this.changeInBasket = this.changeInBasket.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
-  }
-  
-  handleEdit() {
-    // this.props.handleEdit({
-    //   name: this.state.name,
-    //   quantity: this.state.quantity,
-    // });
   }
   
   changeInBasket() {

@@ -18086,7 +18086,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _basket = __webpack_require__(31);
+var _basket = __webpack_require__(37);
 
 var _basket2 = _interopRequireDefault(_basket);
 
@@ -18127,7 +18127,12 @@ exports.default = App;
 /* 28 */,
 /* 29 */,
 /* 30 */,
-/* 31 */
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18139,19 +18144,44 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var deepCopy = exports.deepCopy = function deepCopy(o) {
+  var output = void 0,
+      v = void 0,
+      key = void 0;
+  output = Array.isArray(o) ? [] : {};
+  for (key in o) {
+    v = o[key];
+    output[key] = (typeof v === "undefined" ? "undefined" : _typeof(v)) === "object" ? deepCopy(v) : v;
+  }
+  return output;
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _basket_form = __webpack_require__(34);
+var _basket_form = __webpack_require__(38);
 
 var _basket_form2 = _interopRequireDefault(_basket_form);
 
-var _basket_item = __webpack_require__(35);
+var _basket_item = __webpack_require__(39);
 
 var _basket_item2 = _interopRequireDefault(_basket_item);
+
+var _deep_copy = __webpack_require__(36);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18226,7 +18256,7 @@ var Basket = function (_React$Component) {
     key: 'updateHistory',
     value: function updateHistory() {
       var newEntry = {
-        items: deepCopy(this.state.items),
+        items: (0, _deep_copy.deepCopy)(this.state.items),
         hideInBasketItems: this.state.hideInBasketItems
       };
       this.setState({
@@ -18354,21 +18384,8 @@ var Basket = function (_React$Component) {
 
 exports.default = Basket;
 
-
-function deepCopy(o) {
-  var output, v, key;
-  output = Array.isArray(o) ? [] : {};
-  for (key in o) {
-    v = o[key];
-    output[key] = (typeof v === 'undefined' ? 'undefined' : _typeof(v)) === "object" ? deepCopy(v) : v;
-  }
-  return output;
-}
-
 /***/ }),
-/* 32 */,
-/* 33 */,
-/* 34 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18492,7 +18509,7 @@ var BasketForm = function (_React$Component) {
 exports.default = BasketForm;
 
 /***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18533,21 +18550,12 @@ var BasketItem = function (_React$Component) {
       name: _this.props.name,
       quantity: _this.props.quantity
     };
-    _this.handleEdit = _this.handleEdit.bind(_this);
     _this.changeInBasket = _this.changeInBasket.bind(_this);
     _this.handleIncrement = _this.handleIncrement.bind(_this);
     return _this;
   }
 
   _createClass(BasketItem, [{
-    key: "handleEdit",
-    value: function handleEdit() {
-      // this.props.handleEdit({
-      //   name: this.state.name,
-      //   quantity: this.state.quantity,
-      // });
-    }
-  }, {
     key: "changeInBasket",
     value: function changeInBasket() {
       this.props.handleEdit(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));

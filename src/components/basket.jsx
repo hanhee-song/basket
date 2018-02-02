@@ -1,6 +1,7 @@
 import React from 'react';
 import BasketForm from './basket_form';
 import BasketItem from './basket_item';
+import { deepCopy } from '../util/deep_copy';
 
 class Basket extends React.Component {
   constructor(props) {
@@ -115,6 +116,7 @@ class Basket extends React.Component {
         <div className="title">Basket</div>
         <BasketForm
           handleAddItem={this.handleAddItem}/>
+        
         <div className="basket-controls">
           <div className="toggle-in-basket button"
             onClick={this.handleToggleHideBasketItems}>
@@ -130,6 +132,7 @@ class Basket extends React.Component {
             value="Undo Change"
             disabled={this.state.history.length === 0}/>
         </div>
+        
         <div className="basket-item-index">
           <div className="basket-item-header">
             <div className="col-1"><i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -145,13 +148,3 @@ class Basket extends React.Component {
 }
 
 export default Basket;
-
-function deepCopy(o) {
-  var output, v, key;
-  output = Array.isArray(o) ? [] : {};
-  for (key in o) {
-    v = o[key];
-    output[key] = (typeof v === "object") ? deepCopy(v) : v;
-  }
-  return output;
-}

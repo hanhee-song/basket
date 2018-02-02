@@ -1,5 +1,5 @@
 import React from 'react';
-import Basket from './basket';
+import Basket from './components/basket';
 
 class App extends React.Component {
   render () {

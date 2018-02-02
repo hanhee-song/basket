@@ -83,14 +83,9 @@ input {
   width: 600px;
   margin: auto;
   height: 80px;
-  // border: 1px solid #777;
-  // border-radius: 4px;
   align-items: center;
   display: flex;
   justify-content: space-around;
-  // -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
-  // -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
-  // box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
   
   .input {
     height: 50px;
@@ -213,8 +208,6 @@ $col-5-width: 90px;
 
 .basket-item-index {
   .col {
-    // align-items: center;
-    // text-align: center;
     overflow: hidden;
   }
   
