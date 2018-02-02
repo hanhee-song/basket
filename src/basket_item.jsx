@@ -13,6 +13,7 @@ class BasketItem extends React.Component {
     //   quantity: this.props.quantity,
     // };
     this.handleEdit = this.handleEdit.bind(this);
+    this.changeInBasket = this.changeInBasket.bind(this);
   }
   
   handleEdit() {
@@ -22,16 +23,26 @@ class BasketItem extends React.Component {
     // });
   }
   
+  changeInBasket() {
+    this.props.handleEdit(Object.assign(
+      {},
+      this.props.item,
+      { inBasket: !this.props.item.inBasket }
+    ));
+    console.log(Object.assign(
+      {},
+      this.props.item,
+      { inBasket: !this.props.item.inBasket }
+    ));
+  }
+  
   render () {
     const item = this.props.item;
     return (
       <div className="basket-item">
-        <div className="checkbox">
-          {
-            item.inBasket
-            ? <i className="far fa-square-check"></i>
-            : <i className="far fa-square"></i>
-          }
+        <div className="checkbox"
+          onClick={this.changeInBasket}>
+          <i className={`fa fa${item.inBasket ? "-check" : ""}-square-o`}></i>
         </div>
         <div className="quantity">{item.quantity}</div>
         <div className="name">{item.name}</div>

@@ -18410,6 +18410,7 @@ var BasketItem = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (BasketItem.__proto__ || Object.getPrototypeOf(BasketItem)).call(this, props));
 
     _this.handleEdit = _this.handleEdit.bind(_this);
+    _this.changeInBasket = _this.changeInBasket.bind(_this);
     return _this;
   }
 
@@ -18422,6 +18423,12 @@ var BasketItem = function (_React$Component) {
       // });
     }
   }, {
+    key: "changeInBasket",
+    value: function changeInBasket() {
+      this.props.handleEdit(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));
+      console.log(Object.assign({}, this.props.item, { inBasket: !this.props.item.inBasket }));
+    }
+  }, {
     key: "render",
     value: function render() {
       var item = this.props.item;
@@ -18430,8 +18437,9 @@ var BasketItem = function (_React$Component) {
         { className: "basket-item" },
         _react2.default.createElement(
           "div",
-          { className: "checkbox" },
-          item.inBasket ? _react2.default.createElement("i", { className: "far fa-square-check" }) : _react2.default.createElement("i", { className: "far fa-square" })
+          { className: "checkbox",
+            onClick: this.changeInBasket },
+          _react2.default.createElement("i", { className: "fa fa" + (item.inBasket ? "-check" : "") + "-square-o" })
         ),
         _react2.default.createElement(
           "div",
